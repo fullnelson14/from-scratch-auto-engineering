@@ -1,10 +1,24 @@
 ---
 title: Learn in Formula
-subtitle: This book is meant to be the underlying working principles for every engineering system on the car, at least at a very basic level. 
+subtitle: Book 2 — working principles for every system on the car
 status: coming-soon
 order: 2
 ---
 
-This book is actively being written/edited. I'll post about it when it gets released.
+In this bigger volume, we'll take a tour throughout every system on the FSAE vehicle for the Template Car (defined on [Start Here]({{ "/start-here/" | relative_url }})). We'll start at the complete beginning for how each system works, going from easy, simple descriptions to detailed, specific math. The relevant formulas and equations for each system will be included. Here are the systems covered:
 
-There are enough things to learn while in your engineering classes. Unfortunately, the basic engineering explanations that you need to understand and design a Formula Student car are not part of regular curriculum. That is what I seek to fill in - take you from zero pre-existing knowledge about how the systems on the car work to understanding the engineering behind everything. 
+- Vehicle Dynamics
+- Tires
+- Suspension
+- Brakes
+- Drivetrain
+- Power Plants
+- Chassis
+- Driver Interface
+- Steering
+- Aero
+- Modeling
+
+I include as many references to other sources as I possibly can, broken up by each system. This is my efforts at making a cohesive "subsystem guide" for my team leads - a guide I really wish we had. The purpose of this book is to give you a foundation from which to build upon - an exposure to all the subjects that you'll need to know to design a car.
+
+This book is currently being written. Chapters will appear in the sidebar as they are released.

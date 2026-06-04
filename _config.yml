@@ -21,6 +21,8 @@ collections:
   books:
     output: true
     permalink: /books/:name/
+  parts:
+    output: false
   chapters:
     output: true
     permalink: /books/:path/

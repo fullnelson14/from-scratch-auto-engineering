@@ -10,6 +10,9 @@
         <a href="{{ '/' | relative_url }}" class="nav-link{% if page.url == '/' %} is-active{% endif %}">Home</a>
       </li>
       <li>
+        <a href="{{ '/start-here/' | relative_url }}" class="nav-link{% if page.url == '/start-here/' %} is-active{% endif %}">Start Here</a>
+      </li>
+      <li>
         <a href="{{ '/about/' | relative_url }}" class="nav-link{% if page.url == '/about/' %} is-active{% endif %}">About</a>
       </li>
     </ul>
@@ -19,33 +22,21 @@
       {% assign book_slug = book.path | split: "/" | last | split: "." | first %}
       {% assign on_book = false %}
       {% if page.url contains book.url %} {% assign on_book = true %} {% endif %}
+      {% assign sorted_chapters = site.chapters | sort: "chapter" %}
+      {% for chapter in sorted_chapters %}
+        {% assign chapter_path = chapter.path | split: "/" %}
+        {% if chapter_path[1] == book_slug and page.url == chapter.url %}
+          {% assign on_book = true %}
+        {% endif %}
+      {% endfor %}
 
       <div class="nav-book{% if on_book %} is-open{% endif %}">
-        <p class="nav-book-title">{{ book.title }}</p>
+        <a href="{{ book.url | relative_url }}" class="nav-book-title{% if page.url == book.url %} is-active{% endif %}">{{ book.title }}</a>
         <ul class="nav-section">
-          <li>
-            <a href="{{ book.url | relative_url }}" class="nav-link{% if page.url == book.url %} is-active{% endif %}">Overview</a>
-          </li>
           {% if book.status == "coming-soon" %}
-            <li><span class="nav-muted">Chapters coming soon</span></li>
+            <li><span class="nav-muted nav-indent-1">Chapters coming soon</span></li>
           {% else %}
-            {% assign chapter_count = 0 %}
-            {% assign sorted_chapters = site.chapters | sort: "chapter" %}
-            {% for chapter in sorted_chapters %}
-              {% assign chapter_parts = chapter.path | split: "/" %}
-              {% if chapter_parts[1] == book_slug %}
-                {% assign chapter_count = chapter_count | plus: 1 %}
-                {% if page.url == chapter.url %} {% assign on_book = true %} {% endif %}
-                <li>
-                  <a href="{{ chapter.url | relative_url }}" class="nav-link nav-link-chapter{% if page.url == chapter.url %} is-active{% endif %}">
-                    {{ chapter.chapter }}. {{ chapter.title }}
-                  </a>
-                </li>
-              {% endif %}
-            {% endfor %}
-            {% if chapter_count == 0 %}
-              <li><span class="nav-muted">No chapters yet</span></li>
-            {% endif %}
+            {% include book-chapters-nav.html book_slug=book_slug %}
           {% endif %}
         </ul>
       </div>

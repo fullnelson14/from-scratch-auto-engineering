@@ -5,6 +5,6 @@ status: in-progress
 order: 1
 ---
 
-This is the first book in the series and introduces someone to the Formula Student/FSAE program. I lay out the baseline understanding that you need in order to get involved, as well as some helpful expectations to set in your first few years. You do not need ANY pre-existing knowledge about the program in order to dive in, I try to keep it as informal as possible. 
+Here, we'll define the basics of what the Formula Student program is all about. We'll define the competition, what it is focused on, and what your program should focus on. We'll cover the ground work on what an Formula vehicle is and is not, as well as the guiding principles for your team (spoiler: earning points). This foundation will set the frame for all of the other volumes, so I suggest starting here.
 
-Chapters appear in the sidebar as they are released. Start with [Chapter 1]({{ "/books/fundamentals-in-formula/01-introduction/" | relative_url }}) when you're ready.
+Chapters appear in the sidebar as they are released. Start with the [Introduction]({{ "/books/fundamentals-in-formula/01-introduction/" | relative_url }}) when you're ready.

@@ -1,0 +1,36 @@
+{% assign sorted_chapters = site.chapters | sort: "chapter" %}
+{% assign sorted_parts = site.parts | sort: "part" %}
+{% assign chapter_count = 0 %}
+{% assign prev_part = "UNSET" %}
+
+{% for chapter in sorted_chapters %}
+  {% assign chapter_path = chapter.path | split: "/" %}
+  {% if chapter_path[1] == include.book_slug %}
+    {% assign chapter_count = chapter_count | plus: 1 %}
+    {% assign current_part = chapter.part | default: "NONE" %}
+
+    {% if current_part != prev_part %}
+      {% if chapter.part %}
+        {% for part in sorted_parts %}
+          {% assign part_path = part.path | split: "/" %}
+          {% if part_path[1] == include.book_slug and part.part == chapter.part %}
+            <li>
+              <span class="nav-part-title nav-indent-1">{{ part.title }}</span>
+            </li>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+      {% assign prev_part = current_part %}
+    {% endif %}
+
+    <li>
+      <a href="{{ chapter.url | relative_url }}" class="nav-link nav-link-chapter{% if chapter.part %} nav-indent-2{% else %} nav-indent-1{% endif %}{% if page.url == chapter.url %} is-active{% endif %}">
+        {% if chapter.chapter %}{{ chapter.chapter }}. {% endif %}{{ chapter.title }}
+      </a>
+    </li>
+  {% endif %}
+{% endfor %}
+
+{% if chapter_count == 0 %}
+  <li><span class="nav-muted nav-indent-1">No chapters yet</span></li>
+{% endif %}

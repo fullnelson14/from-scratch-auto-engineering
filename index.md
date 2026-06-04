@@ -7,7 +7,7 @@ hide_title: true
 
 {{ site.description }}
 
-## Books
+New here? Read [**Start Here**]({{ "/start-here/" | relative_url }}) first — it covers what this collection is, how the books fit together, and where to begin.
 
 {% assign books = site.books | sort: "order" %}
 <ul class="book-grid">

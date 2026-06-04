@@ -1,0 +1,19 @@
+{% assign video_id = include.id %}
+{% assign video_url = "https://www.youtube.com/watch?v=" | append: video_id %}
+<a class="link-card link-card--video" href="{{ video_url }}" target="_blank" rel="noopener noreferrer">
+  <img
+    class="link-card-thumb"
+    src="https://img.youtube.com/vi/{{ video_id }}/hqdefault.jpg"
+    alt=""
+    width="480"
+    height="360"
+    loading="lazy"
+  >
+  <span class="link-card-body">
+    <span class="link-card-label">YouTube</span>
+    <span class="link-card-title">{{ include.title }}</span>
+    {% if include.description %}
+      <span class="link-card-desc">{{ include.description }}</span>
+    {% endif %}
+  </span>
+</a>
