@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+export GEM_HOME="${GEM_HOME:-$HOME/.gem}"
+export PATH="$GEM_HOME/bin:$PATH"
+
+PORT="${1:-4000}"
+
+if ss -tln 2>/dev/null | grep -qE ":${PORT} "; then
+  echo "Port ${PORT} is already in use."
+  echo "Stop the other process first (Ctrl+C in that terminal, or: pkill -f 'jekyll serve')"
+  exit 1
+fi
+
+echo "Starting Jekyll with live reload on port ${PORT}."
+echo "  WSL:      http://127.0.0.1:${PORT}/"
+echo "  Windows:  use the globe icon in Cursor's Ports tray (often localhost:4001)"
+echo ""
+echo "Open the root URL above — not /from-scratch-auto-engineering/ (that path is production only)."
+echo "Use ./bin/serve, not plain 'jekyll serve', or CSS paths will not match."
+echo ""
+echo "Do not refresh manually — the browser reloads when the build finishes."
+echo "If styles vanish, hard-refresh once (Ctrl+Shift+R) then let live reload handle updates."
+
+# Full rebuild avoids stale asset URLs when baseurl differs from production.
+rm -rf _site
+bundle exec jekyll build --config _config.yml,_config_dev.yml
+
+exec bundle exec jekyll serve \
+  --config _config.yml,_config_dev.yml \
+  --host 0.0.0.0 \
+  --port "${PORT}" \
+  --livereload \
+  --skip-initial-build

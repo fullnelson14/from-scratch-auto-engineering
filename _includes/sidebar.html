@@ -1,0 +1,54 @@
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    <p class="site-tagline">{{ site.description }}</p>
+  </div>
+
+  <nav class="sidebar-nav" aria-label="Site navigation">
+    <ul class="nav-section">
+      <li>
+        <a href="{{ '/' | relative_url }}" class="nav-link{% if page.url == '/' %} is-active{% endif %}">Home</a>
+      </li>
+      <li>
+        <a href="{{ '/about/' | relative_url }}" class="nav-link{% if page.url == '/about/' %} is-active{% endif %}">About</a>
+      </li>
+    </ul>
+
+    {% assign books = site.books | sort: "order" %}
+    {% for book in books %}
+      {% assign book_slug = book.path | split: "/" | last | split: "." | first %}
+      {% assign on_book = false %}
+      {% if page.url contains book.url %} {% assign on_book = true %} {% endif %}
+
+      <div class="nav-book{% if on_book %} is-open{% endif %}">
+        <p class="nav-book-title">{{ book.title }}</p>
+        <ul class="nav-section">
+          <li>
+            <a href="{{ book.url | relative_url }}" class="nav-link{% if page.url == book.url %} is-active{% endif %}">Overview</a>
+          </li>
+          {% if book.status == "coming-soon" %}
+            <li><span class="nav-muted">Chapters coming soon</span></li>
+          {% else %}
+            {% assign chapter_count = 0 %}
+            {% assign sorted_chapters = site.chapters | sort: "chapter" %}
+            {% for chapter in sorted_chapters %}
+              {% assign chapter_parts = chapter.path | split: "/" %}
+              {% if chapter_parts[1] == book_slug %}
+                {% assign chapter_count = chapter_count | plus: 1 %}
+                {% if page.url == chapter.url %} {% assign on_book = true %} {% endif %}
+                <li>
+                  <a href="{{ chapter.url | relative_url }}" class="nav-link nav-link-chapter{% if page.url == chapter.url %} is-active{% endif %}">
+                    {{ chapter.chapter }}. {{ chapter.title }}
+                  </a>
+                </li>
+              {% endif %}
+            {% endfor %}
+            {% if chapter_count == 0 %}
+              <li><span class="nav-muted">No chapters yet</span></li>
+            {% endif %}
+          {% endif %}
+        </ul>
+      </div>
+    {% endfor %}
+  </nav>
+</aside>

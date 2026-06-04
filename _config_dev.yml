@@ -1,0 +1,8 @@
+# Local preview overrides. Use with:
+#   ./bin/serve
+#
+# The github-pages gem ignores the `development:` block in _config.yml and
+# keeps the production baseurl unless this file is passed on the command line.
+
+baseurl: ""
+url: "http://localhost:4000"

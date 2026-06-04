@@ -1,0 +1,13 @@
+---
+layout: docs
+---
+
+<div class="book-overview">
+  {% if page.subtitle %}<p class="book-subtitle">{{ page.subtitle }}</p>{% endif %}
+  {% if page.status == "coming-soon" %}
+    <p class="status-badge">Coming soon</p>
+  {% elsif page.status == "in-progress" %}
+    <p class="status-badge status-badge--active">In progress — chapters released over time</p>
+  {% endif %}
+  {{ content }}
+</div>

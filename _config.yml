@@ -1,0 +1,47 @@
+title: From Scratch Automotive Engineering
+description: Engineering books on building a Formula Student race car and team from scratch, released chapter by chapter.
+author: Brad Nelson 
+
+# Footer profile links (full URLs). Leave blank to hide a link.
+social:
+  linkedin: "https://www.linkedin.com/in/brad-j-nelson/"
+  substack: "https://fsautoeng.substack.com/"
+  hideout: "https://enterhideout.app"
+
+# GitHub Pages project site (production). For local preview, _config_dev.yml
+# overrides baseurl — see bin/serve or README.
+url: "https://fullnelson14.github.io"
+baseurl: "/from-scratch-auto-engineering"
+
+markdown: kramdown
+kramdown:
+  input: GFM
+
+collections:
+  books:
+    output: true
+    permalink: /books/:name/
+  chapters:
+    output: true
+    permalink: /books/:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: docs
+  - scope:
+      type: books
+    values:
+      layout: book
+  - scope:
+      type: chapters
+    values:
+      layout: chapter
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor

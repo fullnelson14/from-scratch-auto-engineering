@@ -1,0 +1,30 @@
+---
+layout: docs
+---
+
+<article class="chapter-body">
+  {{ content }}
+</article>
+
+<footer class="chapter-footer">
+  {% assign path_parts = page.path | split: "/" %}
+  {% assign book_slug = path_parts[1] %}
+  {% assign sorted_chapters = site.chapters | sort: "chapter" %}
+  {% assign prev_num = page.chapter | minus: 1 %}
+  {% assign next_num = page.chapter | plus: 1 %}
+
+  <nav class="chapter-nav" aria-label="Chapter navigation">
+    {% for ch in sorted_chapters %}
+      {% assign ch_parts = ch.path | split: "/" %}
+      {% if ch_parts[1] == book_slug and ch.chapter == prev_num %}
+        <a class="chapter-nav-prev" href="{{ ch.url | relative_url }}">&larr; {{ ch.title }}</a>
+      {% endif %}
+    {% endfor %}
+    {% for ch in sorted_chapters %}
+      {% assign ch_parts = ch.path | split: "/" %}
+      {% if ch_parts[1] == book_slug and ch.chapter == next_num %}
+        <a class="chapter-nav-next" href="{{ ch.url | relative_url }}">{{ ch.title }} &rarr;</a>
+      {% endif %}
+    {% endfor %}
+  </nav>
+</footer>

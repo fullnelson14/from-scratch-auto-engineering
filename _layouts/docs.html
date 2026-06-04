@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% if jekyll.environment == "development" %}
+    <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  {% else %}
+    {% seo %}
+  {% endif %}
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+</head>
+<body>
+  <div class="site">
+    {% include sidebar.html %}
+    <div class="site-body">
+      <main class="content">
+        {% unless page.hide_title %}
+          {% if page.title %}<h1 class="page-title">{{ page.title }}</h1>{% endif %}
+        {% endunless %}
+        {{ content }}
+      </main>
+      {% include footer.html %}
+    </div>
+  </div>
+</body>
+</html>

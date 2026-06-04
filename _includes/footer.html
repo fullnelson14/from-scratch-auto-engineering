@@ -1,0 +1,19 @@
+<footer class="site-footer">
+  <nav class="site-footer-social" aria-label="Social profiles">
+    {% if site.social.linkedin %}
+      <a class="site-footer-link" href="{{ site.social.linkedin }}" rel="me noopener noreferrer" target="_blank">LinkedIn</a>
+    {% else %}
+      <span class="site-footer-link">LinkedIn</span>
+    {% endif %}
+    {% if site.social.substack %}
+      <a class="site-footer-link" href="{{ site.social.substack }}" rel="me noopener noreferrer" target="_blank">Substack</a>
+    {% else %}
+      <span class="site-footer-link">Substack</span>
+    {% endif %}
+    {% if site.social.hideout %}
+      <a class="site-footer-link" href="{{ site.social.hideout }}" rel="me noopener noreferrer" target="_blank">Hideout</a>
+    {% else %}
+      <span class="site-footer-link">Hideout</span>
+    {% endif %}
+  </nav>
+</footer>
